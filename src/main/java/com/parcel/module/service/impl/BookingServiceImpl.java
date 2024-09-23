@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.parcel.module.constants.BookingStatus;
+import com.parcel.module.dto.BookingReponseDto;
 import com.parcel.module.exception.BookingNotFound;
 import com.parcel.module.model.Booking;
 import com.parcel.module.repository.BookingRepository;
@@ -57,5 +58,7 @@ public class BookingServiceImpl implements BookingService {
         return booking;
 
     }
+
+
 
 }

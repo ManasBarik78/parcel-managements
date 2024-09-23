@@ -21,4 +21,9 @@ public class GlobalExceptionHandler  {
     public ResponseEntity<String> handleRuntimeException(RuntimeException e) {
         return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(NoBookingsFoundExeception.class)
+    public ResponseEntity<String> noBookingsFoundException(RuntimeException e){
+        return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
+    }
 }
