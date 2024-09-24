@@ -12,6 +12,7 @@ Backend system which aids in goods delivery services.
  - data JPA
 -  security
 - Junit testing
+- swagger UI
 
 
 
@@ -21,3 +22,7 @@ Backend system which aids in goods delivery services.
 - edit booking
 - get all booking list
 - get booking by id 
+
+## Swagger UI
+
+- link : http://localhost:8000/swagger-ui/index.html
