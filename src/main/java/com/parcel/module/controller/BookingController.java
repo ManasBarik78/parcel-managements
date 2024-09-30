@@ -1,5 +1,7 @@
 package com.parcel.module.controller;
 
+import com.parcel.module.dto.BookingRequestDto;
+import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,7 +35,9 @@ public class BookingController {
     // Create booking details to database
     @PostMapping("/booking")
     @Operation(summary = "create a new booking", description = "")
-    public Booking createBooking(@RequestBody Booking booking) {
+    public BookingResponseDto createBooking(@RequestBody BookingRequestDto bookingRequestDto) {
+        var booking = new Booking();
+        BeanUtils.copyProperties(bookingRequestDto,booking);
         return bookingService.createBooking(booking);
     }
 
@@ -53,14 +57,16 @@ public class BookingController {
     // Find Booking by id
     @GetMapping("/booking/{bookingId}")
     @Operation(summary = "Get booking by ID", description = "")
-    public Booking getBookingById(@PathVariable String bookingId) {
+    public BookingResponseDto getBookingById(@PathVariable String bookingId) {
+
         return bookingService.getBookingById(bookingId);
+
     }
 
     // Edit the additional stop
     @PutMapping("/booking/addstop/{bookingId}")
     @Operation(summary = "Add additional stop to existing booking", description = "")
-    public Booking addAdditionalStop(@PathVariable String bookingId, @RequestBody List<String> additionalStop) {
+    public BookingResponseDto addAdditionalStop(@PathVariable String bookingId, @RequestBody List<String> additionalStop) {
         return bookingService.editAdditionalStop(bookingId, additionalStop);
     }
 }

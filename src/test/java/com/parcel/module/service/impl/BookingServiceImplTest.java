@@ -76,7 +76,7 @@ class BookingServiceImplTest {
         booking2.setSenderID("Sender ID");
 
         // Act
-        Booking actualCreateBookingResult = bookingServiceImpl.createBooking(booking2);
+        BookingResponseDto actualCreateBookingResult = bookingServiceImpl.createBooking(booking2);
 
         // Assert
         verify(bookingRepository).save(isA(Booking.class));
@@ -278,7 +278,7 @@ class BookingServiceImplTest {
         when(bookingRepository.findById(Mockito.<String>any())).thenReturn(ofResult);
 
         // Act
-        Booking actualBookingById = bookingServiceImpl.getBookingById("42");
+        BookingResponseDto actualBookingById = bookingServiceImpl.getBookingById("42");
 
         // Assert
         verify(bookingRepository).findById(eq("42"));
@@ -347,7 +347,7 @@ class BookingServiceImplTest {
         when(bookingRepository.findById(Mockito.<String>any())).thenReturn(ofResult);
 
         // Act
-        Booking actualEditAdditionalStopResult = bookingServiceImpl.editAdditionalStop("42", new ArrayList<>());
+        BookingResponseDto actualEditAdditionalStopResult = bookingServiceImpl.editAdditionalStop("42", new ArrayList<>());
 
         // Assert
         verify(bookingRepository).findById(eq("42"));
@@ -436,7 +436,7 @@ class BookingServiceImplTest {
         additionalStop.add("foo");
 
         // Act
-        Booking actualEditAdditionalStopResult = bookingServiceImpl.editAdditionalStop("42", additionalStop);
+        BookingResponseDto actualEditAdditionalStopResult = bookingServiceImpl.editAdditionalStop("42", additionalStop);
 
         // Assert
         verify(bookingRepository).findById(eq("42"));
@@ -483,7 +483,7 @@ class BookingServiceImplTest {
         additionalStop.add("foo");
 
         // Act
-        Booking actualEditAdditionalStopResult = bookingServiceImpl.editAdditionalStop("42", additionalStop);
+        BookingResponseDto actualEditAdditionalStopResult = bookingServiceImpl.editAdditionalStop("42", additionalStop);
 
         // Assert
         verify(bookingRepository).findById(eq("42"));

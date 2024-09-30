@@ -2,6 +2,7 @@ package com.parcel.module.service.impl;
 
 import com.parcel.module.modelMapper.ConvertMapper;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +31,7 @@ public class BookingServiceImpl implements BookingService {
 
     // Create booking details to database
     @Override
-    public Booking createBooking(Booking booking) {
+    public BookingResponseDto createBooking(Booking booking) {
 
         var bookingId = UUID.randomUUID().toString();
 
@@ -39,7 +40,9 @@ public class BookingServiceImpl implements BookingService {
         booking.setBookingStatus(BookingStatus.ONGOING);
 
         bookingRepository.save(booking);
-        return booking;
+        BookingResponseDto bookingResponseDto = new BookingResponseDto();
+        BeanUtils.copyProperties(booking, bookingResponseDto);
+        return bookingResponseDto;
     }
 
     // Get All the Booking
@@ -51,19 +54,23 @@ public class BookingServiceImpl implements BookingService {
 
     // Find Booking by id
     @Override
-    public Booking getBookingById(String bookingId) {
+    public BookingResponseDto getBookingById(String bookingId) {
         Booking booking = bookingRepository.findById(bookingId).orElseThrow(() -> new BookingNotFound(bookingId));
-        return booking;
+        BookingResponseDto responseDto = new BookingResponseDto();
+        BeanUtils.copyProperties(booking, responseDto);
+        return responseDto;
     }
 
     // Edit the additional stop
     @Override
-    public Booking editAdditionalStop(String bookingId, List<String> additionalStop) {
+    public BookingResponseDto editAdditionalStop(String bookingId, List<String> additionalStop) {
 
         Booking booking = bookingRepository.findById(bookingId).orElseThrow(() -> new BookingNotFound(bookingId));
         booking.setAdditionalStop(additionalStop);
         bookingRepository.save(booking);
-        return booking;
+        BookingResponseDto responseDto = new BookingResponseDto();
+        BeanUtils.copyProperties(booking, responseDto);
+        return responseDto;
 
     }
 

@@ -5,12 +5,12 @@ import com.parcel.module.model.Booking;
 import java.util.*;
 public interface BookingService {
 
-    Booking createBooking(Booking booking);
+    BookingResponseDto createBooking(Booking booking);
 
     List<BookingResponseDto> getAllBookings();
 
-    Booking getBookingById(String bookingId);
+    BookingResponseDto getBookingById(String bookingId);
 
-    Booking editAdditionalStop(String bookingId, List<String> additionalStop);
+    BookingResponseDto editAdditionalStop(String bookingId, List<String> additionalStop);
     
 }
