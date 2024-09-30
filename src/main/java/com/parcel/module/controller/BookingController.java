@@ -37,8 +37,6 @@ public class BookingController {
         return bookingService.createBooking(booking);
     }
 
-     
-
 
      // Get All the Booking
      @GetMapping("/bookings")
