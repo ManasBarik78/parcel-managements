@@ -13,7 +13,7 @@ public class ConvertMapper {
     @Autowired
     private ModelMapper modelMapper;
 
-    public BookingResponseDto convertBookingReponseDto(Booking booking) {
+    public BookingResponseDto convertBookingToBookingReponseDto(Booking booking) {
         BookingResponseDto bookingReponseDto = this.modelMapper.map(booking, BookingResponseDto.class);
         return bookingReponseDto;
     }

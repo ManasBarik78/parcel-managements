@@ -68,7 +68,7 @@ public class BookingServiceImpl implements BookingService {
     }
 
     private BookingResponseDto convertBookingReponseDto(Booking booking) {
-        BookingResponseDto bookingReponseDto = convertMapper.convertBookingReponseDto(booking);
+        BookingResponseDto bookingReponseDto = convertMapper.convertBookingToBookingReponseDto(booking);
         return bookingReponseDto;
     }
 
