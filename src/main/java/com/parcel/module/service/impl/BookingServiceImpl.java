@@ -65,16 +65,19 @@ public class BookingServiceImpl implements BookingService {
 
     private BookingResponseDto convertBookingReponseDto(Booking booking) {
         BookingResponseDto bookingReponseDto = new BookingResponseDto();
+
         bookingReponseDto.setBookingId(booking.getBookingId());
+        bookingReponseDto.setCreatedDate(booking.getCreatedDate());
         bookingReponseDto.setSenderID(booking.getSenderID());
         bookingReponseDto.setReceiverID(booking.getReceiverID());
+        bookingReponseDto.setPickupLocation(booking.getPickupLocation());
         bookingReponseDto.setDropoffLocation(booking.getDropoffLocation());
         bookingReponseDto.setParcelName(booking.getParcelName());
+        bookingReponseDto.setParcelWeight(booking.getParcelWeight());
         bookingReponseDto.setAdditionalStop(booking.getAdditionalStop());
         bookingReponseDto.setBookingStatus(booking.getBookingStatus());
 
         return bookingReponseDto;
-
     }
 
 }
