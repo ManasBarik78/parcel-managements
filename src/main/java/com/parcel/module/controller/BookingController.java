@@ -3,7 +3,8 @@ package com.parcel.module.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.parcel.module.dto.BookingResponseDto;
+import com.parcel.module.dto.BookingResponseDto;
 import com.parcel.module.exception.NoBookingsFoundExeception;
 import com.parcel.module.model.Booking;
 import com.parcel.module.service.BookingService;
@@ -36,17 +37,20 @@ public class BookingController {
         return bookingService.createBooking(booking);
     }
 
-    // Get All the Booking
-    @GetMapping("/bookings")
-    @Operation(summary = "Get all booking list", description = "")
-    public List<Booking> getBookings() {
-        List<Booking> bookings = bookingService.getAllBookings();
+     
 
-        if(bookings.isEmpty()){
-            throw new NoBookingsFoundExeception();
-        }
-        return bookings;
-    }
+
+     // Get All the Booking
+     @GetMapping("/bookings")
+     @Operation(summary = "Get all booking list", description = "")
+     public List<BookingResponseDto> getBookings() {
+         List<BookingResponseDto> bookings = bookingService.getAllBookings();
+ 
+         if(bookings.isEmpty()){
+             throw new NoBookingsFoundExeception();
+         }
+         return bookings;
+     }
 
     // Find Booking by id
     @GetMapping("/booking/{bookingId}")

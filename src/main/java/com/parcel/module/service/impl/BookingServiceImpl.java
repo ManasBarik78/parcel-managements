@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.parcel.module.constants.BookingStatus;
 
-import com.parcel.module.dto.BookingReponseDto;
+import com.parcel.module.dto.BookingResponseDto;
 
 import com.parcel.module.exception.BookingNotFound;
 import com.parcel.module.model.Booking;
@@ -16,6 +16,7 @@ import com.parcel.module.service.BookingService;
 import java.util.List;
 import java.util.UUID;
 import java.time.LocalDateTime;
+import java.util.stream.Collectors;
 
 @Service
 public class BookingServiceImpl implements BookingService {
@@ -39,8 +40,9 @@ public class BookingServiceImpl implements BookingService {
 
     // Get All the Booking
     @Override
-    public List<Booking> getAllBookings() {
-        return bookingRepository.findAll();
+    public List<BookingResponseDto> getAllBookings() {
+        return bookingRepository.findAll().stream().map(this::convertBookingReponseDto).collect(Collectors.toList());
+        
     }
 
     // Find Booking by id
@@ -58,6 +60,20 @@ public class BookingServiceImpl implements BookingService {
         booking.setAdditionalStop(additionalStop);
         bookingRepository.save(booking);
         return booking;
+
+    }
+
+    private BookingResponseDto convertBookingReponseDto(Booking booking) {
+        BookingResponseDto bookingReponseDto = new BookingResponseDto();
+        bookingReponseDto.setBookingId(booking.getBookingId());
+        bookingReponseDto.setSenderID(booking.getSenderID());
+        bookingReponseDto.setReceiverID(booking.getReceiverID());
+        bookingReponseDto.setDropoffLocation(booking.getDropoffLocation());
+        bookingReponseDto.setParcelName(booking.getParcelName());
+        bookingReponseDto.setAdditionalStop(booking.getAdditionalStop());
+        bookingReponseDto.setBookingStatus(booking.getBookingStatus());
+
+        return bookingReponseDto;
 
     }
 
