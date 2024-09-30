@@ -34,7 +34,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ContextConfiguration(classes = {BookingServiceImpl.class})
 @ExtendWith(SpringExtension.class)
 @DisabledInAotMode
-class BookingServiceImplDiffblueTest {
+class BookingServiceImplTest {
     @MockBean
     private BookingRepository bookingRepository;
 
