@@ -1,6 +1,7 @@
 package com.parcel.module.service.impl;
 
-import org.apache.el.stream.Optional;
+import com.parcel.module.modelMapper.ConvertMapper;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,9 @@ public class BookingServiceImpl implements BookingService {
     @Autowired
     private BookingRepository bookingRepository;
 
+    @Autowired
+    private ConvertMapper convertMapper;
+
     // Create booking details to database
     @Override
     public Booking createBooking(Booking booking) {
@@ -42,7 +46,7 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public List<BookingResponseDto> getAllBookings() {
         return bookingRepository.findAll().stream().map(this::convertBookingReponseDto).collect(Collectors.toList());
-        
+
     }
 
     // Find Booking by id
@@ -64,19 +68,7 @@ public class BookingServiceImpl implements BookingService {
     }
 
     private BookingResponseDto convertBookingReponseDto(Booking booking) {
-        BookingResponseDto bookingReponseDto = new BookingResponseDto();
-
-        bookingReponseDto.setBookingId(booking.getBookingId());
-        bookingReponseDto.setCreatedDate(booking.getCreatedDate());
-        bookingReponseDto.setSenderID(booking.getSenderID());
-        bookingReponseDto.setReceiverID(booking.getReceiverID());
-        bookingReponseDto.setPickupLocation(booking.getPickupLocation());
-        bookingReponseDto.setDropoffLocation(booking.getDropoffLocation());
-        bookingReponseDto.setParcelName(booking.getParcelName());
-        bookingReponseDto.setParcelWeight(booking.getParcelWeight());
-        bookingReponseDto.setAdditionalStop(booking.getAdditionalStop());
-        bookingReponseDto.setBookingStatus(booking.getBookingStatus());
-
+        BookingResponseDto bookingReponseDto = convertMapper.convertBookingReponseDto(booking);
         return bookingReponseDto;
     }
 
