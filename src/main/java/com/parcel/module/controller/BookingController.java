@@ -1,7 +1,9 @@
 package com.parcel.module.controller;
 
 import com.parcel.module.dto.BookingRequestDto;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.BeanUtils;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -68,5 +70,11 @@ public class BookingController {
     @Operation(summary = "Add additional stop to existing booking", description = "")
     public BookingResponseDto addAdditionalStop(@PathVariable String bookingId, @RequestBody List<String> additionalStop) {
         return bookingService.editAdditionalStop(bookingId, additionalStop);
+    }
+
+    //Getting CSRF token
+    @GetMapping("/get-csrf-token")
+    public CsrfToken getCSRFToken(HttpServletRequest request) {
+        return (CsrfToken) request.getAttribute("_csrf");
     }
 }
